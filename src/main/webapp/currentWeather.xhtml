@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panel header="#{main.display.queryCity}" id="panel2"> 
+	<h:panelGrid columns="2" cellpadding="10">
+		<p:graphicImage id="weather_img" value="#{main.display.weatherIconUrl}"
+			width="64px" height="64px" />
+		<p:panel>
+			<h:panelGrid columns="2" cellpadding="5"> 
+        		<h:outputText id="weatherDesc_label" value="Opis: " />
+				<h:outputText id="weatherDesc" value="#{main.display.weatherDesc}" />   	
+			</h:panelGrid>
+			<h:panelGrid columns="3" cellpadding="5">
+				<h:outputText id="temp_label" value="Temperatura zraka: " />
+				<h:outputText id="temp" value="#{main.display.temp}" />
+				<h:outputText id="temp_unit" value="celzija" />
+				<h:outputText id="humidity_label" value="Vlažnost zraka: " />
+				<h:outputText id="humidity" value="#{main.display.humidity}" />
+				<h:outputText id="humidity_unit" value="%" />
+				<h:outputText id="pressure_label" value="Tlak zraka: " />
+				<h:outputText id="pressure" value="#{main.display.pressure}" />
+				<h:outputText id="pressure_unit" value="hPa" />
+				<h:outputText id="cloudcover_label" value="Naoblaka: " />
+				<h:outputText id="cloudcover" value="#{main.display.cloudcover}" />
+				<h:outputText id="cloudcover_unit" value="%" />
+				<h:outputText id="windspeedKmph_label" value="Brzina vjetra: " />
+				<h:outputText id="windspeedKmph" value="#{main.display.windspeedKmph}" />
+				<h:outputText id="windspeedKmph_unit" value="km/h" />
+			</h:panelGrid>
+			
+	</p:panel>
+	</h:panelGrid>
+	</p:panel>
+</html>

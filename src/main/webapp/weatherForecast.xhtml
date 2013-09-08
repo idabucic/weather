@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">	
+	
+	<p:panel header="#{main.display.queryCity}" id="panel2"> 
+    	<h:panelGrid columns="2" cellpadding="10">  
+        	<p:graphicImage id="weather_img" value="#{main.display.weatherIconUrl}" width="64px" height="64px"/>  
+        	<p:panel> 
+        	<h:panelGrid columns="2" cellpadding="5">  
+        		<h:outputText id="weatherDesc_label" value="Opis: " />
+				<h:outputText id="weatherDesc" value="#{main.display.weatherDesc}" />   
+				<h:outputText  id="date_label" value="Datum: " />  
+    			<h:outputText  id="date" value="#{main.display.date}" />  	
+			</h:panelGrid>
+			<h:panelGrid columns="3" cellpadding="5"> 
+    			<h:outputText  id="tempMaxC_label" value="Max. temperatura: " />  
+    			<h:outputText  id="tempMaxC" value="#{main.display.tempMaxC}" />  
+    			<h:outputText  id="htempMaxC_unit" value="celzija " /> 
+    			<h:outputText  id="tempMinC_label" value="Min. temperatura: " />  
+    			<h:outputText  id="tempMinC" value="#{main.display.tempMinC}" />  
+    			<h:outputText  id="tempMinC_unit" value="celzija" />  	
+    		</h:panelGrid>
+    		</p:panel>
+    	</h:panelGrid>  
+	 </p:panel>
+</html>

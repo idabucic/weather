@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:panel header="Vremensko izvješće" toggleable="true" id="panel1">  
+			<h:panelGrid columns="2" cellpadding="5"> 
+		        <p:selectOneButton value="#{main.number}" >  
+		            <f:selectItem itemLabel="Trenutno vrijeme" itemValue="1" />  
+		            <f:selectItem itemLabel="Vremenska prognoza za sutra" itemValue="2" />   
+		        </p:selectOneButton> 
+	        </h:panelGrid>  
+			<h:panelGrid columns="5" cellpadding="5">  
+				<h:outputLabel value="Grad: " for="city" />  
+	            <p:autoComplete id="city" value="#{main.city}" completeMethod="#{main.complete}"/>  
+	            <p:tooltip for="city" value="upišite ime grada" showEffect="fade" hideEffect="fade" />  
+				<p:commandButton value="Dohvati" update="display" id="ajaxDohvati" actionListener="#{main.getWheather}" /> 
+             	<p:commandButton value="Obriši" update="display,city" id="ajaxObrisi" actionListener="#{main.clean}" /> 
+			</h:panelGrid>  
+			<p:fieldset id="display">
+				<ui:include src="#{main.display.xhtmlFile}" />
+			</p:fieldset>
+			
+	    </p:panel>  
+	</h:form>
+
+</h:body>
+</html>

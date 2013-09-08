@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:panel header="Vremensko izvješće" toggleable="true" id="panel">  
+			<h:panelGrid columns="2" cellpadding="5"> 
+		        <p:selectOneButton value="#{editor.number}" >  
+		            <f:selectItem itemLabel="Trenutno vrijeme" itemValue="1" />  
+		            <f:selectItem itemLabel="Vremenska prognoza za 3 dana" itemValue="2" />   
+		        </p:selectOneButton> 
+	        </h:panelGrid>  
+			<h:panelGrid columns="5" cellpadding="5">  
+				<h:outputLabel value="Grad: " for="city" />  
+	            <p:autoComplete id="city" value="#{editor.city}" completeMethod="#{editor.complete}"/>  
+	            <p:tooltip for="city" value="upišite ime grada" showEffect="fade" hideEffect="fade" />  
+				<p:commandButton value="Dohvati" update="weather_img,weather_text" id="ajaxDohvati" actionListener="#{editor.getWheather}" /> 
+             	<p:commandButton value="Obriši" update="weather_img,weather_text,city" id="ajaxObrisi" actionListener="#{editor.clean}" /> 
+			</h:panelGrid>  
+			<p:fieldset >  
+    			<h:panelGrid columns="2" cellpadding="10">  
+        			<p:graphicImage id="weather_img" value="/resources/images/white.jpg" width="64px" height="64px"/>  
+       				 <h:outputText  id="weather_text" value="#{editor.value}" />  
+    			</h:panelGrid>  
+			</p:fieldset>  
+			
+	    </p:panel>  
+	</h:form>
+
+</h:body>
+</html>
