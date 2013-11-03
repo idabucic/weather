@@ -1,0 +1,3 @@
+lokalizacija
+log4j
+json

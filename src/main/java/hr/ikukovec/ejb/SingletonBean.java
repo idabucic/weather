@@ -45,13 +45,6 @@ public class SingletonBean {
 	/**
 	 * @return
 	 */
-	public String getNumberOfDays() {
-		return readFromConfigFile("number_of_days");
-	}
-	
-	/**
-	 * @return
-	 */
 	public String getURL() {
 		return readFromConfigFile("url");
 	}

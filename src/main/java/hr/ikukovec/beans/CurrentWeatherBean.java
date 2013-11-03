@@ -127,12 +127,9 @@ public class CurrentWeatherBean extends DisplayElement {
 			System.out.println("current conditions");
 			NodeList list0 = doc.getElementsByTagName("request");
 			Node n0 = list0.item(0);
-			if (n0.getNodeType() == Node.ELEMENT_NODE) {
-				Element e = (Element) n0;
-				String query = e.getElementsByTagName("query").item(0).getTextContent();
-				System.out.println("queryCity " + query);
-				setQueryCity(query);
-			}
+			
+			String qCity = Util.readQueryCity(doc);
+			setQueryCity(qCity);
 			
 			NodeList list = doc.getElementsByTagName("current_condition");				 
 			Node n = list.item(0);

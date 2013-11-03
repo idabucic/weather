@@ -97,7 +97,7 @@ public class WeatherForecastBean extends DisplayElement {
 	 **/
 	public void loadData(Document doc) {
 			System.out.println("weather forecast");
-			String qCity = WeatherUtil.readQueryCity(doc);
+			String qCity = Util.readQueryCity(doc);
 			setQueryCity(qCity);
 			readDailyData(doc, 1);		
 	}
@@ -114,7 +114,7 @@ public class WeatherForecastBean extends DisplayElement {
 			
 			String date = e.getElementsByTagName("date").item(0).getTextContent();
 			System.out.println("date " + date);
-			setDate(date);
+			setDate(Util.formatDate(date));
 			
 			String tempMaxC = e.getElementsByTagName("tempMaxC").item(0).getTextContent();
 			System.out.println("tempMaxC " + tempMaxC);
