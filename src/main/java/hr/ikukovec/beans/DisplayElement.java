@@ -12,7 +12,7 @@ import org.w3c.dom.Node;
  * @since 26.07.2013
  * 
  * this is an abstract class 
- * it is created for concrete classes for display elements to extend from it
+ * it is created for concrete display elements to extend from it
  *
  */
 public abstract class DisplayElement {
@@ -20,6 +20,7 @@ public abstract class DisplayElement {
 	public enum DisplayElementType {
 		CURRENT_WEATHER(1),
 		WEATHER_FORECAST(2),
+		FORECAST(3),
 		EMPTY_DISPLAY(0);
 		
 		private int type;
@@ -28,10 +29,13 @@ public abstract class DisplayElement {
 		}
 		
 		public DisplayElementType getDisplayElementType (int type) {
+			System.out.println("getDisplayElementType " + type);
 			if (type == 1) {
 				return CURRENT_WEATHER;
 			} else if (type == 2) {
 				return WEATHER_FORECAST;
+			} else if (type == 3) {
+				return FORECAST;
 			} else if (type == 0) {
 				return EMPTY_DISPLAY;
 			} else {

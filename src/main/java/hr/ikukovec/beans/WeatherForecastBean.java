@@ -13,7 +13,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * @author Ida
- * @version 1.0
+ * @version 1.1
  * @since 26.07.2013
  * 
  * this is a concrete class for a DisplayElement
@@ -93,52 +93,47 @@ public class WeatherForecastBean extends DisplayElement {
 	 */
 	/** 
 	 * loads data from web service response to properties of WeatherForecastBean
-	 * 
+	 * for independent use
 	 **/
 	public void loadData(Document doc) {
 			System.out.println("weather forecast");
-			
-			NodeList list0 = doc.getElementsByTagName("request");
-			Node n0 = list0.item(0);
-			if (n0.getNodeType() == Node.ELEMENT_NODE) {
-				Element e = (Element) n0;
-				String query = e.getElementsByTagName("query").item(0).getTextContent();
-				System.out.println("queryCity " + query);
-				setQueryCity(query);
-			}
-			NodeList nList = doc.getElementsByTagName("weather");
-		 
-			//for (int temp = 0; temp < nList.getLength(); temp++) {
-				//Node nNode = nList.item(temp);
-				Node nNode = nList.item(1);
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-		 
-					Element e = (Element) nNode;
-					
-					String date = e.getElementsByTagName("date").item(0).getTextContent();
-					System.out.println("date " + date);
-					setDate(date);
-					
-					String tempMaxC = e.getElementsByTagName("tempMaxC").item(0).getTextContent();
-					System.out.println("tempMaxC " + tempMaxC);
-					setTempMaxC(tempMaxC);
-					
-					String tempMinC = e.getElementsByTagName("tempMinC").item(0).getTextContent();
-					System.out.println("tempMinC " + tempMinC);
-					setTempMinC(tempMinC);
-					
-					String weatherDesc = e.getElementsByTagName("weatherDesc").item(0).getTextContent();
-					System.out.println("weatherDesc " + weatherDesc);
-					setWeatherDesc(weatherDesc);
-					
-					String weatherIconUrl = e.getElementsByTagName("weatherIconUrl").item(0).getTextContent();
-					System.out.println("weatherIconUrl " + weatherIconUrl);
-					setWeatherIconUrl(weatherIconUrl);
-					
-					
-				}
-			//}
-		
+			String qCity = WeatherUtil.readQueryCity(doc);
+			setQueryCity(qCity);
+			readDailyData(doc, 1);		
 	}
+	
+	/** 
+	 * loads data from web service response to properties of WeatherForecastBean
+	 * called from ForecastBean
+	 **/
+	public void readDailyData(Document doc, int day) {
+		NodeList nList = doc.getElementsByTagName("weather");
+		Node nNode = nList.item(day);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {	 
+			Element e = (Element) nNode;
+			
+			String date = e.getElementsByTagName("date").item(0).getTextContent();
+			System.out.println("date " + date);
+			setDate(date);
+			
+			String tempMaxC = e.getElementsByTagName("tempMaxC").item(0).getTextContent();
+			System.out.println("tempMaxC " + tempMaxC);
+			setTempMaxC(tempMaxC);
+			
+			String tempMinC = e.getElementsByTagName("tempMinC").item(0).getTextContent();
+			System.out.println("tempMinC " + tempMinC);
+			setTempMinC(tempMinC);
+			
+			String weatherDesc = e.getElementsByTagName("weatherDesc").item(0).getTextContent();
+			System.out.println("weatherDesc " + weatherDesc);
+			setWeatherDesc(weatherDesc);
+			
+			String weatherIconUrl = e.getElementsByTagName("weatherIconUrl").item(0).getTextContent();
+			System.out.println("weatherIconUrl " + weatherIconUrl);
+			setWeatherIconUrl(weatherIconUrl);
+		}
+	}
+	
+	
 	
 }

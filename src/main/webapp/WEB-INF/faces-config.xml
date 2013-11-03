@@ -15,11 +15,6 @@
 	<managed-bean-name>main</managed-bean-name>
 	<managed-bean-class>hr.ikukovec.beans.MainAppBean</managed-bean-class>
 	<managed-bean-scope>session</managed-bean-scope>
-	<managed-property>
-		<property-name>factory</property-name>
-		<property-class>hr.ikukovec.beans.DisplayElementFactory</property-class>
-		<value>#{factory}</value>
-	</managed-property>
 </managed-bean>
 <managed-bean>
 	<managed-bean-name>factory</managed-bean-name>

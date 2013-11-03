@@ -1,6 +1,7 @@
 package hr.ikukovec.beans;
 
 import hr.ikukovec.beans.DisplayElement.DisplayElementType;
+import hr.ikukovec.ejb.SingletonBean;
 
 import java.io.*;
 import java.net.*;
@@ -13,15 +14,13 @@ import javax.faces.event.ActionEvent;
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
 
-//http://balusc.blogspot.com/2006/09/debug-jsf-lifecycle.html
 /**
  * @author Ida
  * @version 1.0
  * @since 26.07.2013
  * 
- *        this is a main bean for the application initializes during first HTTP
- *        request
- * 
+ * this is a main bean for the application 
+ * initializes during first HTTP request
  * 
  */
 @ManagedBean(name = "main")
@@ -31,8 +30,6 @@ public class MainAppBean {
 	private SingletonBean sb;
 
 	private DisplayElement display;
-
-	private DisplayElementFactory factory = new DisplayElementFactory();
 
 	/**
 	 * this is a default value for selected DisplayElement
@@ -49,7 +46,7 @@ public class MainAppBean {
 	public void init() {
 		System.err.println("inišalajz!");
 
-		DisplayElement de = factory
+		DisplayElement de = DisplayElementFactory
 				.createDisplayElement(DisplayElementType.EMPTY_DISPLAY);
 		setDisplay(de);
 		this.display.loadData(null);
@@ -72,7 +69,7 @@ public class MainAppBean {
 	 * executes on button click
 	 */
 	public void clean() {
-		setDisplay(factory
+		setDisplay(DisplayElementFactory
 				.createDisplayElement(DisplayElementType.EMPTY_DISPLAY));
 		this.display.loadData(null);
 		setCity(null);
@@ -96,7 +93,7 @@ public class MainAppBean {
 		String url = sb.getURL();
 		String charset = sb.getCharset();
 		String formatValue = sb.getFormatValue();
-		String numOfDays = sb.getNumberOfDays();
+		String numOfDays = (new Integer(getNumberOfDays())).toString();
 		String keyValue = sb.getKeyValue();
 		String qValue = getCity();
 
@@ -134,13 +131,13 @@ public class MainAppBean {
 			display.loadData(doc);
 
 		} catch (NullPointerException e) {
-			setDisplay(factory
+			setDisplay(DisplayElementFactory
 					.createDisplayElement(DisplayElementType.EMPTY_DISPLAY));
 			this.display.setWeatherDesc("Greška! Grad ne postoji!");
 			e.printStackTrace();
 
 		} catch (Exception e) {
-			setDisplay(factory
+			setDisplay(DisplayElementFactory
 					.createDisplayElement(DisplayElementType.EMPTY_DISPLAY));
 			this.display.setWeatherDesc("Greška!");
 			e.printStackTrace();
@@ -236,51 +233,21 @@ public class MainAppBean {
 	 */
 	private void initializeDisplay() {
 		if (getDisplayType() == 1) {
-			setDisplay(factory
+			setDisplay(DisplayElementFactory
 					.createDisplayElement(DisplayElementType.CURRENT_WEATHER));
 		} else if (getDisplayType() == 2) {
-			setDisplay(factory
+			setDisplay(DisplayElementFactory
 					.createDisplayElement(DisplayElementType.WEATHER_FORECAST));
+		} else if (getDisplayType() == 3) {
+			setDisplay(DisplayElementFactory
+					.createDisplayElement(DisplayElementType.FORECAST));
 		} else if (getDisplayType() == 0) {
-			setDisplay(factory
+			setDisplay(DisplayElementFactory
 					.createDisplayElement(DisplayElementType.EMPTY_DISPLAY));
 		} else {
 			throw new IllegalArgumentException("number " + getDisplayType()
 					+ " is not allowed for DisplayElementType");
 		}
-	}
-
-	/**
-	 * @return
-	 */
-	public DisplayElementFactory getFactory() {
-		return factory;
-	}
-
-	/**
-	 * @param factory
-	 */
-	public void setFactory(DisplayElementFactory factory) {
-		this.factory = factory;
-	}
-
-	private Boolean viewGrid = true;
-
-	public Boolean getViewGrid() {
-		return viewGrid;
-	}
-
-	public void setViewGrid(Boolean viewGrid) {
-		this.viewGrid = viewGrid;
-	}
-
-	public void changeView(ActionEvent evt) {
-		System.err.println("mijenjam view na: " + !getViewGrid());
-
-		boolean newViewGrid = !getViewGrid();
-		setViewGrid(newViewGrid);
-		evt.getComponent().setRendered(true);
-
 	}
 
 }
